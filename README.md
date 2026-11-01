@@ -14,6 +14,7 @@ The application does not save or log passwords.
 
 ## 2. Project Structure
 
+```text
 PasswordPolicyValidator/
 │
 ├── bot.py
@@ -21,6 +22,7 @@ PasswordPolicyValidator/
 ├── test_functional.py
 ├── test_security.py
 └── README.md
+```
 
 ### File Description
 
