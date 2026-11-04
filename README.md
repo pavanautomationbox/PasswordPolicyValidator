@@ -108,7 +108,7 @@ All 8 unit tests should pass if the password validation function works correctly
 
 Functional testing checks whether the application performs its expected functions correctly.
 
-In this project, functional testing verifies that the password validator follows all defined password policy rules.
+In this project, functional testing verifies that the password validator follows all defined password policy rules and correctly handles different password inputs.
 
 ## Tool Used
 
@@ -116,30 +116,57 @@ Pytest is used to perform automated functional testing.
 
 ## File Used
 
-test_functional.py
+`test_functional.py`
 
 ## Functional Test Cases
 
-| Test Case                                | Expected Result            |
-| ---------------------------------------- | -------------------------- |
-| Valid password                           | Password accepted          |
-| Password below minimum length            | Password rejected          |
-| Password without uppercase               | Validation failed          |
-| Password without lowercase               | Validation failed          |
-| Password without number                  | Validation failed          |
-| Password without special character       | Validation failed          |
-| Weak password                            | Password rejected          |
-| Weak password with different letter case | Password rejected          |
-| Password with multiple rule failures     | All failed rules displayed |
-| Empty password                           | Password rejected          |
+| Test Case | Expected Result |
+|---|---|
+| Valid password | Password accepted |
+| Password below minimum length | Password rejected |
+| Password without uppercase | Validation failed |
+| Password without lowercase | Validation failed |
+| Password without number | Validation failed |
+| Password without special character | Validation failed |
+| Weak password | Password rejected |
+| Weak password with different letter case | Password rejected |
+| Password with multiple rule failures | All failed rules displayed |
+| Empty password | Password rejected |
+| Parametrized valid password examples | All valid passwords accepted |
+| Parametrized invalid password examples | All invalid passwords rejected |
+| True Positive (TP) test | Valid password correctly accepted |
+| True Negative (TN) test | Invalid password correctly rejected |
+| False Positive (FP) prevention test | Invalid password is not accepted |
+| False Negative (FN) prevention test | Valid password is not rejected |
+| Fixture setup and teardown | Test data is prepared and cleaned up after testing |
 
-## Expected Result
+## Advanced Pytest Concepts Used
 
-All 10 functional tests should pass.
+- **Fixtures:** Provide reusable test data for multiple test functions.
+- **Teardown:** Clean up test data after the tests finish.
+- **Parametrization:** Run the same test with multiple password examples using `@pytest.mark.parametrize`.
+- **Positive assertions:** Verify that valid passwords return an empty list of failed rules.
+- **Negative assertions:** Verify that invalid passwords return one or more failed rules.
 
-The application should correctly identify valid and invalid passwords.
+## Confusion Matrix Test Scenarios
+
+| Scenario | Expected Password | Actual Result | Meaning |
+|---|---|---|---|
+| True Positive (TP) | Valid | Accepted | Correctly accepts a valid password |
+| True Negative (TN) | Invalid | Rejected | Correctly rejects an invalid password |
+| False Positive (FP) | Invalid | Accepted | Incorrectly accepts an invalid password |
+| False Negative (FN) | Valid | Rejected | Incorrectly rejects a valid password |
+
+The FP and FN tests are prevention tests. They verify that the application does not make these mistakes.
+
+## How to Run Functional Tests
+
+Run all functional tests:
+
+pytest -v test_functional.py
 
 ---
+
 
 # 7. Security Testing
 
